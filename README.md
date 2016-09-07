@@ -1,17 +1,21 @@
 SpreeFxCurrency
 ===============
 
-Introduction goes here.
+Spree currency converter. Use foreign exchange rates (relative to main currency) mannualy entered in admin area.
+
+Uses [spree-contrib/spree_multi_currency](https://github.com/spree-contrib/spree_multi_currency/) fork as dependency.
 
 ## Installation
 
 1. Add this extension to your Gemfile with this line:
   ```ruby
-  gem 'spree_fx_currency', github: '[your-github-handle]/spree_fx_currency', branch: 'X-X-stable'
+  gem 'spree_fx_currency', github: 'itbeaver/spree_fx_currency', branch: '3-0-stable'
   ```
 
   The `branch` option is important: it must match the version of Spree you're using.
   For example, use `3-1-stable` if you're using Spree `3-1-stable` or any `3.1.x` version.
+
+  For now - implemented **only** `3-0-stable` branch
 
 2. Install the gem using Bundler:
   ```ruby
@@ -50,4 +54,4 @@ If you'd like to contribute, please take a look at the
 [instructions](CONTRIBUTING.md) for installing dependencies and crafting a good
 pull request.
 
-Copyright (c) 2016 [name of extension creator], released under the New BSD License
+Copyright (c) 2016 Artem Russkikh, released under the New BSD License

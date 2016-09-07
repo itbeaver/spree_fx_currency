@@ -1,14 +1,21 @@
 # encoding: UTF-8
+
+lib = File.expand_path('../lib/', __FILE__)
+$LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
+
+require 'spree_fx_currency/version'
+
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_fx_currency'
-  s.version     = '3.1.1'
-  s.summary     = 'TODO: Add gem summary here'
-  s.description = 'TODO: Add (optional) gem description here'
+  s.version     = SpreeFxCurrency.version
+  s.summary     = 'Spree currency converter'
+  s.description = 'Use foreign exchange rates (relative to main currency) '\
+                  'mannualy entered in admin area'
   s.required_ruby_version = '>= 2.1.0'
 
-  # s.author    = 'You'
-  # s.email     = 'you@example.com'
+  s.author    = 'Artem Russkikh'
+  s.email     = 'rusartx@gmail.com'
   # s.homepage  = 'http://www.spreecommerce.com'
   s.license = 'BSD-3'
 
@@ -17,7 +24,8 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 3.1.1'
+  s.add_dependency 'spree_core', '~> 3.0.0'
+  s.add_dependency 'spree_multi_currency', '~> 3.0.0'
 
   s.add_development_dependency 'capybara', '~> 2.6'
   s.add_development_dependency 'coffee-rails'
@@ -29,4 +37,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'selenium-webdriver'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'pry-rails', '>= 0.3.0'
+  s.add_development_dependency 'rubocop'
 end
