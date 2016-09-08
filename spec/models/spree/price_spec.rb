@@ -22,7 +22,7 @@ RSpec.describe Spree::Price, type: :model do
       end
     end
 
-    xcontext 'when FX rate is set' do
+    context 'when FX rate is set' do
       before(:each) do
         Spree::Config.supported_currencies = 'USD, EUR'
         Spree::FxRate.create_supported_currencies
