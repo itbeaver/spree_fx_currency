@@ -26,14 +26,16 @@ RSpec.describe Spree::Price, type: :model do
       before(:each) do
         Spree::Config.supported_currencies = 'USD, EUR'
         Spree::FxRate.create_supported_currencies
-        Spree::FxRate.find_by(currency: 'EUR').update_attributes(value: 0.887)
+        Spree::FxRate.find_by(currency: 'EUR').update_attributes(
+          rate: 0.884791322
+        )
       end
 
       context 'when currency is EUR' do
         before(:each) { price.currency = 'EUR' }
 
         it 'returns the value in the EUR' do
-          expect(subject.to_s).to eql '€8.87'
+          expect(subject.to_s).to eql '€8.85'
         end
       end
 

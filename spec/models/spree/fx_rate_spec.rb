@@ -1,7 +1,7 @@
 RSpec.describe Spree::FxRate, type: :model do
   subject { described_class.new }
 
-  it('#value') { expect(subject).to respond_to(:value) }
+  it('#rate') { expect(subject).to respond_to(:rate) }
   it('#currency') { expect(subject).to respond_to(:currency) }
 
   context '.create_supported_currencies' do
