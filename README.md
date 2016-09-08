@@ -3,7 +3,7 @@ SpreeFxCurrency
 
 Spree currency converter. Use foreign exchange rates (relative to main currency) mannualy entered in admin area.
 
-Uses [spree-contrib/spree_multi_currency](https://github.com/spree-contrib/spree_multi_currency/) fork as dependency.
+Extends [spree-contrib/spree_multi_currency](https://github.com/spree-contrib/spree_multi_currency/).
 
 ## Installation
 
