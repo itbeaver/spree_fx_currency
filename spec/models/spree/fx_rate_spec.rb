@@ -28,7 +28,7 @@ RSpec.describe Spree::FxRate, type: :model do
 
       subject { to_price.display_amount }
 
-      xit 'updates prices using from_currency price and rate' do
+      it 'updates prices using from_currency price and rate' do
         expect { fx_rate.update_all_prices }.to change { subject.to_s }
           .from('€5.00').to('€8.85')
       end
@@ -37,7 +37,7 @@ RSpec.describe Spree::FxRate, type: :model do
     context 'when prices with currency=to_currency not exists' do
       let!(:from_price) { create(:price, currency: 'USD', amount: 10.00) }
 
-      xit 'creates prices using from_currency price and rate' do
+      it 'creates prices using from_currency price and rate' do
         variant_prices = from_price.variant.prices
         expect { fx_rate.update_all_prices }.to change { variant_prices.count }
           .from(0).to(1)
