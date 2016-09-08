@@ -2,4 +2,19 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  spree:
+    fx_rates: 'FX Rates'
+    fx_rate: 'FX Rate'
+    create_supported_currencies: 'Create default currencies'
+    new_fx_rate: 'New FX Rate'
+    fx_rate_rate_explanation: 'Formule: product to_currency = from_currency product price amount * rate'
+  activerecord:
+    models:
+      spree/fx_rate:
+        one: 'FX Rate'
+        other: 'FX Rates'
+    attributes:
+      spree/fx_rate:
+        from_currency: 'From Currency'
+        to_currency: 'To Currency'
+        rate: 'Rate'
