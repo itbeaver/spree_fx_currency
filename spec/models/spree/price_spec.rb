@@ -4,6 +4,12 @@ RSpec.describe Spree::Price, type: :model do
   context '#amount' do
     subject { price.display_amount }
 
+    context 'when amount is nil' do
+      before(:each) { price.amount = nil }
+
+      it('not raise an error') { expect { subject }.not_to raise_error }
+    end
+
     context 'when FX rate is not set' do
       context 'when currency is EUR' do
         before(:each) { price.currency = 'EUR' }
