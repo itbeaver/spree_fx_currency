@@ -13,7 +13,7 @@ end
 # Configure Rails Environment
 ENV['RAILS_ENV'] = 'test'
 
-require File.expand_path('../dummy/config/environment.rb',  __FILE__)
+require File.expand_path('../dummy/config/environment.rb', __FILE__)
 
 require 'rspec/rails'
 require 'database_cleaner'
@@ -29,6 +29,8 @@ require 'spree/testing_support/capybara_ext'
 require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/factories'
 require 'spree/testing_support/url_helpers'
+
+require 'spree/testing_support/preferences'
 
 # Requires factories defined in lib/spree_fx_currency/factories.rb
 require 'spree_fx_currency/factories'
@@ -89,5 +91,5 @@ RSpec.configure do |config|
   end
 
   config.fail_fast = ENV['FAIL_FAST'] || false
-  config.order = "random"
+  config.order = 'random'
 end
