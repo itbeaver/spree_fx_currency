@@ -9,4 +9,9 @@ gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: spree_branch
 gem 'spree_multi_currency', github: 'spree-contrib/spree_multi_currency',
                             branch: spree_branch
 
+group :development, :test do
+  gem 'pry-rails'
+  gem 'rubocop'
+end
+
 gemspec
