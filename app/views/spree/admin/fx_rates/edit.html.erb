@@ -1,0 +1,10 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:editing_resource, resource: Spree::FxRate.model_name.human) %>
+<% end %>
+
+<%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @fx_rate } %>
+
+<%= form_for [:admin, @fx_rate] do |f| %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+<% end %>

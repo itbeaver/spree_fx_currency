@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:new_fx_rate) %>
+<% end %>
+
+<%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @fx_rate } %>
+
+<%= form_for [:admin, @fx_rate] do |f| %>
+  <fieldset>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+
+    <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+  </fieldset>
+<% end %>
