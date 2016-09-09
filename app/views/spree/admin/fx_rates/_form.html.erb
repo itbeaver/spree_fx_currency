@@ -8,9 +8,13 @@
 
     <div class="panel-body">
       <div class="col-md-12">
-        <div data-hook="currency" class="form-group">
-          <%= f.label :currency, Spree.t(:currency) %>
-          <%= f.text_field :currency, :class => 'form-control' %>
+        <div data-hook="from_currency" class="form-group">
+          <%= f.label :from_currency, Spree.t(:from_currency) %>
+          <%= f.text_field :from_currency, :class => 'form-control' %>
+        </div>
+        <div data-hook="to_currency" class="form-group">
+          <%= f.label :to_currency, Spree.t(:to_currency) %>
+          <%= f.text_field :to_currency, :class => 'form-control' %>
         </div>
         <div data-hook="rate" class="form-group">
           <%= f.label :rate, Spree.t(:rate) %>
