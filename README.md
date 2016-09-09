@@ -1,5 +1,8 @@
 SpreeFxCurrency
 ===============
+[![Build Status](https://travis-ci.org/itbeaver/spree_fx_currency.svg?branch=3-0-stable)](https://travis-ci.org/itbeaver/spree_fx_currency)
+[![Code Climate](https://codeclimate.com/github/itbeaver/spree_fx_currency/badges/gpa.svg)](https://codeclimate.com/github/itbeaver/spree_fx_currency)
+
 
 Spree currency converter. Use foreign exchange rates (relative to main currency) mannualy entered in admin area.
 
