@@ -1,12 +1,12 @@
 Spree::Core::Engine.routes.draw do
   namespace :admin do
     resources :fx_rates do
-      member do
-        get :update_all_prices
+      collection do
+        get :fetch_all
       end
 
-      collection do
-        get :create_supported_currencies
+      member do
+        get :fetch
       end
     end
   end

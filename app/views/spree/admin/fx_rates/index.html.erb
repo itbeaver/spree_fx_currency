@@ -3,11 +3,8 @@
 <% end %>
 
 <% content_for :page_actions do %>
-  <%= button_link_to Spree.t(:create_supported_currencies), spree.create_supported_currencies_admin_fx_rates_url, class: "btn-success" %>
-  <%= button_link_to Spree.t(:new_fx_rate), new_object_url, class: "btn-success", icon: 'add' %>
+  <%= button_link_to Spree.t(:fetch_all_fx_rate), spree.fetch_all_admin_fx_rates_url, class: "btn-success" %>
 <% end if can? :create, Spree::FxRate %>
-
-<%= Spree.t(:update_all_prices_note) %>
 
 <% if @fx_rates.any? %>
   <table class="table">
@@ -24,11 +21,10 @@
       <tr id="<%= spree_dom_id fx_rate %>" data-hook="rate_row">
         <td><%= fx_rate.from_currency %></td>
         <td><%= fx_rate.to_currency %></td>
-        <td><%= fx_rate.rate %></td>
+        <td><%= fx_rate.rate %> (<%= link_to Spree.t(:fetch_fx_rate), spree.fetch_admin_fx_rate_url(fx_rate) if can? :edit, fx_rate %>)</td>
         <td class="actions actions-2 text-right">
-          <%= button_link_to Spree.t(:update_all_prices), spree.update_all_prices_admin_fx_rate_url(fx_rate), class: "btn-success" if can? :edit, fx_rate %>
           <%= link_to_edit(fx_rate, no_text: true) if can? :edit, fx_rate %>
-          <%= link_to_delete(fx_rate, no_text: true) if can? :delete, fx_rate %>
+          <%# link_to_delete(fx_rate, no_text: true) if can? :delete, fx_rate %>
         </td>
       </tr>
       <% end %>

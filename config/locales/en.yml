@@ -5,11 +5,8 @@ en:
   spree:
     fx_rates: 'FX Rates'
     fx_rate: 'FX Rate'
-    create_supported_currencies: 'Create default currencies'
-    update_all_prices: 'Update all prices'
-    update_all_prices_note: 'Will update in two ways: master variants and variants prices according to price in currency=from_currency or, if from_currency is blank - master variants and variants prices according to master product price currency'
-    new_fx_rate: 'New FX Rate'
-    fx_rate_rate_explanation: 'Formule: product to_currency = from_currency product price amount * rate'
+    fetch_fx_rate: 'fetch from fixer.io'
+    fetch_all_fx_rate: 'Fetch all rates from fixer.io'
   activerecord:
     models:
       spree/fx_rate:
