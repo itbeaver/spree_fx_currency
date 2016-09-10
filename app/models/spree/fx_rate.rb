@@ -7,6 +7,8 @@ module Spree
       greater_than_or_equal_to: 0
     }
 
+    after_save :update_all_prices
+
     def self.create_supported_currencies
       return unless table_exists?
       main_currency = Spree::Config.currency
