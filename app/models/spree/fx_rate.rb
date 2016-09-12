@@ -1,3 +1,5 @@
+require 'fixer_client'
+
 module Spree
   class FxRate < Spree::Base
     validates :from_currency, presence: true
@@ -23,25 +25,17 @@ module Spree
     end
 
     def self.fetch_fixer
-      base = Spree::Config.currency
-      symbols = pluck(:to_currency).map(&:upcase).join(',')
-      uri = URI("http://api.fixer.io/latest?base=#{base}&symbols=#{symbols}")
-      response = Net::HTTP.get(uri)
-      parsed_response = JSON.parse(response)
-      return false if parsed_response['rates'].blank?
-      parsed_response['rates'].each do |currency, value|
+      request = FixerClient.new(Spree::Config.currency, pluck(:to_currency))
+      request.fetch.each do |currency, value|
         find_by(to_currency: currency).try(:update_attributes, rate: value)
       end
       true
     end
 
     def fetch_fixer
-      base = from_currency.upcase
-      symbol = to_currency.upcase
-      uri = URI("http://api.fixer.io/latest?base=#{base}&symbols=#{symbol}")
-      response = Net::HTTP.get(uri)
-      parsed_response = JSON.parse(response)
-      new_rate = parsed_response['rates'].try(:[], symbol)
+      request = FixerClient.new(from_currency, [to_currency])
+      new_rate = request.fetch
+      return false unless new_rate
       update_attributes(rate: new_rate)
     end
 
