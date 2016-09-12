@@ -1,0 +1,31 @@
+AllCops:
+  Include:
+    - '**/Gemfile'
+    - '**/Rakefile'
+    - 'config.ru'
+  Exclude:
+    - 'bin/*'
+    - 'db/seeds.rb'
+    - 'db/schema.rb'
+    - 'vendor/bundle/**/*'
+    - 'config/environments/*'
+    - 'config/initializers/*'
+    - 'config/unicorn.rb'
+    - 'config/deploy.rb'
+    - 'db/migrate/*'
+    - 'spec/spec_helper.rb'
+    - 'spec/rails_helper.rb'
+    - 'Rakefile'
+    - 'spec/support/**/*'
+    - 'page-proof/**/*'
+    - 'app/services/xml_service.rb'
+    - spec/dummy/**/*
+
+Style/Documentation:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/AsciiComments:
+  Enabled: false
+Metrics/LineLength:
+  Max: 100

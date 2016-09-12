@@ -2,4 +2,18 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  spree:
+    fx_rates: 'FX Rates'
+    fx_rate: 'FX Rate'
+    fetch_fx_rate: 'fetch from fixer.io'
+    fetch_all_fx_rate: 'Fetch all rates from fixer.io'
+  activerecord:
+    models:
+      spree/fx_rate:
+        one: 'FX Rate'
+        other: 'FX Rates'
+    attributes:
+      spree/fx_rate:
+        from_currency: 'From Currency'
+        to_currency: 'To Currency'
+        rate: 'Rate'

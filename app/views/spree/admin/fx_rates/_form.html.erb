@@ -1,0 +1,32 @@
+<div data-hook="admin_fx_rate_form_fields">
+  <div class="panel panel-default" data-hook="fx_rates">
+    <div class="panel-heading">
+      <h1 class="panel-title">
+        <%= Spree.t(:general_settings) %>
+      </h1>
+    </div>
+
+    <div class="panel-body">
+      <div class="col-md-12">
+        <div data-hook="from_currency" class="form-group">
+          <%= f.label :from_currency, Spree.t(:from_currency) %>
+          <%= f.text_field :from_currency, :class => 'form-control', disabled: 'disable' %>
+        </div>
+        <div data-hook="to_currency" class="form-group">
+          <%= f.label :to_currency, Spree.t(:to_currency) %>
+          <%= f.text_field :to_currency, :class => 'form-control', disabled: 'disable' %>
+        </div>
+        <div data-hook="rate" class="form-group">
+          <%= f.label :rate, Spree.t(:rate) %>
+          <%= f.text_field :rate, :class => 'form-control' %>
+          <% if false %>
+            <p class="help-block">
+              <%# Spree.t(:fx_rate_rate_explanation) %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

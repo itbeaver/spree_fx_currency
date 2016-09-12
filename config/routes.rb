@@ -1,3 +1,13 @@
 Spree::Core::Engine.routes.draw do
-  # Add your extension routes here
+  namespace :admin do
+    resources :fx_rates do
+      collection do
+        get :fetch_all
+      end
+
+      member do
+        get :fetch
+      end
+    end
+  end
 end
