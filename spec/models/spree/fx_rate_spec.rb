@@ -91,8 +91,9 @@ RSpec.describe Spree::FxRate, type: :model do
         context '#fetch_fixer' do
           subject { to_eur }
 
-          it 'not raises error' do
-            expect { subject.fetch_fixer }.not_to raise_error
+          it 'updates rate' do
+            expect { subject.fetch_fixer }.to change { subject.rate }
+              .from(1.0).to(0.89079)
           end
         end
       end
@@ -107,6 +108,14 @@ RSpec.describe Spree::FxRate, type: :model do
 
           it 'not raises error' do
             expect { subject.fetch_fixer }.not_to raise_error
+          end
+
+          it 'updates all rates' do
+            expect { subject.fetch_fixer }.to(
+              change { subject.order(:to_currency).pluck(:to_currency, :rate) }
+              .from([['EUR', 1.0], ['GBP', 1.0]])
+              .to([['EUR', 0.89079], ['GBP', 0.75249]])
+            )
           end
         end
       end
