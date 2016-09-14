@@ -48,32 +48,23 @@ module Spree
     # @todo: implement force option for only applying
     #        fx rate changes to blank prices
     def update_all_prices
-      Spree::Product.all.each do |product|
-        proccess_master(product)
-        proccess_variants(product)
+      Spree::Product.transaction do
+        Spree::Product.all.each { |p| proccess_variants(p) }
       end
     end
 
     private
 
     def proccess_variants(product)
-      product.variants.each do |variant|
+      product.variants_including_master.each do |variant|
         from_price = variant.price_in(from_currency.upcase)
+
         next if from_price.new_record?
+
         new_price = variant.price_in(to_currency.upcase)
         new_price.amount = from_price.amount * rate
         new_price.save if new_price.changed?
       end
-    end
-
-    def proccess_master(product)
-      from_price = product.price_in(from_currency.upcase)
-
-      return if from_price.new_record?
-
-      new_price = product.price_in(to_currency.upcase)
-      new_price.amount = from_price.amount * rate
-      new_price.save if new_price.changed?
     end
   end
 end
