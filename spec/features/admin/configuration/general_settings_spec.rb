@@ -17,7 +17,9 @@ describe 'General Settings', type: :feature do
 
       expect(find_field(name: field_name).value).to eq(currencies)
 
-      expect(Spree::FxRate.count).to eq(2)
+      rates = Spree::FxRate.order(:id).pluck(:to_currency)
+      expect(rates).to eq %w(EUR GBP)
+      expect(rates).not_to include 'USD'
     end
   end
 end
