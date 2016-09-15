@@ -1,0 +1,11 @@
+HTTP/1.1 200 OK
+Server: nginx/1.11.1
+Date: Mon, 12 Sep 2016 16:54:32 GMT
+Content-Type: application/json
+Content-Length: 58
+Connection: keep-alive
+Last-Modified: Mon, 12 Sep 2016 00:00:00 GMT
+Vary: Origin
+X-Content-Type-Options: nosniff
+
+{"base":"USD","date":"2016-09-12","rates":{"EUR":0.89079}}
