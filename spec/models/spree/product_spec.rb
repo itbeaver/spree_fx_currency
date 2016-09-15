@@ -8,14 +8,16 @@ describe Spree::Product, type: :model do
 
       it 'prices created for new product' do
         variants_ids = product.variants_including_master.pluck(:id)
-        prices = Spree::Price.where(id: variants_ids).pluck(:currency, :amount)
+        prices = Spree::Price.where(
+          variant_id: variants_ids
+        ).order(:id).pluck(:currency, :amount)
 
         clone = product.duplicate
 
         clone_variants_ids = clone.variants_including_master.pluck(:id)
         clone_prices = Spree::Price.where(
-          id: clone_variants_ids
-        ).pluck(:currency, :amount)
+          variant_id: clone_variants_ids
+        ).order(:id).pluck(:currency, :amount)
 
         expect(clone_prices).to eq(prices)
       end
@@ -27,7 +29,7 @@ describe Spree::Product, type: :model do
 
       it 'prices created for new product' do
         variants_ids = product.variants_including_master.pluck(:id)
-        prices = Spree::Price.where(id: variants_ids)
+        prices = Spree::Price.where(variant_id: variants_ids).order(:id)
                              .map { |p| [p.currency, p.display_amount.to_s] }
 
         expect(prices).to eq(
