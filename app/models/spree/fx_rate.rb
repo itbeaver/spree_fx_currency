@@ -9,23 +9,34 @@ module Spree
       greater_than_or_equal_to: 0
     }
 
-    after_save :update_all_prices
+    after_save :update_products_prices
+
+    def self.spree_currency
+      Spree::Config.currency
+    end
+
+    def self.supported_currencies
+      Spree::Config.supported_currencies.split(', ')
+                   .reject { |c| spree_currency.to_s == c.upcase }
+    rescue NoMethodError => _e
+      []
+    end
+
+    def self.sync_currencies_from_config
+      found_currencies = supported_currencies.map do |c|
+        find_or_create_by(from_currency: spree_currency, to_currency: c.upcase).id
+      end
+      where.not(id: found_currencies).destroy_all
+    end
 
     def self.create_supported_currencies
       return unless table_exists?
-      main_currency = Spree::Config.currency
-      currencies = Spree::Config.supported_currencies.try(:split, ', ') || []
-      ids = currencies.reject { |c| main_currency.to_s == c.upcase }.map do |c|
-        find_or_create_by(
-          from_currency: main_currency, to_currency: c.upcase
-        ).id
-      end
-      where.not(id: ids).destroy_all if ids.present?
+      sync_currencies_from_config
       fetch_fixer if Rails.env.production?
     end
 
     def self.fetch_fixer
-      request = FixerClient.new(Spree::Config.currency, pluck(:to_currency))
+      request = FixerClient.new(spree_currency, pluck(:to_currency))
       request.fetch.each do |currency, value|
         find_by(to_currency: currency).try(:update_attributes, rate: value)
       end
@@ -41,15 +52,13 @@ module Spree
 
     # @todo: implement force option for only applying
     #        fx rate changes to blank prices
-    def update_all_prices
+    def update_products_prices
       Spree::Product.transaction do
-        Spree::Product.all.each { |p| proccess_variants(p) }
+        Spree::Product.all.each { |p| update_prices_for(p) }
       end
     end
 
-    private
-
-    def proccess_variants(product)
+    def update_prices_for(product)
       product.variants_including_master.each do |variant|
         from_price = variant.price_in(from_currency.upcase)
 
