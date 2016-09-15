@@ -18,41 +18,41 @@ RSpec.describe Spree::FxRate, type: :model do
   end
 
   context 'when fx rates created' do
-    let!(:to_eur) { create(:fx_rate, to_currency: 'EUR') }
+    let!(:to_eur) { create(:fx_rate, to_currency: 'EUR', rate: 1.0) }
 
-    context '#update_all_prices' do
-      before(:each) { to_eur.update(rate: 0.884791322) }
-
+    context '#update_products_prices' do
       subject { to_eur }
 
       context 'when product has only master variant' do
         context 'when prices with currency=to_currency exists' do
           let!(:product) { create(:product, price: 10.00) }
           let(:variant) { product.master }
-          let(:from_price) { master.price }
           let!(:to_price) do
-            create(:price, currency: 'EUR', amount: 5.0, variant: variant)
+            Spree::Price.find_by(variant_id: variant.id, currency: 'EUR')
           end
 
           it 'updates prices using from_currency price and rate' do
-            expect { subject.update_all_prices }.to change {
+            to_eur.update_column(:rate, 0.884791322)
+
+            expect { subject.update_products_prices }.to change {
               to_price.reload.display_amount.to_s
-            }.from('€5.00').to('€8.85')
+            }.from('€10.00').to('€8.85')
           end
         end
 
         context 'when prices with currency=to_currency not exists' do
           let!(:product) { create(:product, price: 10.00) }
           let(:variant) { product.master }
-          let(:from_price) { master.price }
 
           it 'creates prices using from_currency price and rate' do
+            to_eur.update_column(:rate, 0.884791322)
+
             variant_prices = variant.prices
 
-            expect { subject.update_all_prices }.to change {
+            expect { subject.update_products_prices }.to change {
               variant_prices.find_by(currency: subject.to_currency)
                             .try(:display_amount).to_s
-            }.from('').to('€8.85')
+            }.from('€10.00').to('€8.85')
           end
         end
       end
@@ -62,12 +62,13 @@ RSpec.describe Spree::FxRate, type: :model do
           let!(:product) { create(:product, price: 10.00) }
           let(:master_variant) { product.master }
           let!(:variant) { create(:variant, product: product, price: 10.00) }
-          let(:from_price) { master.price }
 
           it 'creates variants prices using from_currency price and rate' do
+            to_eur.update_column(:rate, 0.884791322)
+
             variant_prices = variant.reload.prices
 
-            expect { subject.update_all_prices }.to change {
+            expect { subject.update_products_prices }.to change {
               variant_prices.reload.find_by(currency: subject.to_currency)
                             .try(:display_amount).to_s
             }.from('').to('€8.85')
