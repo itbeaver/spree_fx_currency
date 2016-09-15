@@ -2,7 +2,7 @@ namespace :spree_fx_currency do
   namespace :update do
     desc 'Updates all prices according to FX Rates'
     task prices: :environment do
-      Spree::FxRate.all.each(&:update_all_prices)
+      Spree::FxRate.all.each(&:update_products_prices)
       puts 'Done!'
     end
 

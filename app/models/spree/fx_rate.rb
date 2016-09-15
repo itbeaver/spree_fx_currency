@@ -9,7 +9,7 @@ module Spree
       greater_than_or_equal_to: 0
     }
 
-    after_save :update_all_prices
+    after_save :update_products_prices
 
     def self.create_supported_currencies
       return unless table_exists?
@@ -41,15 +41,13 @@ module Spree
 
     # @todo: implement force option for only applying
     #        fx rate changes to blank prices
-    def update_all_prices
+    def update_products_prices
       Spree::Product.transaction do
-        Spree::Product.all.each { |p| proccess_variants(p) }
+        Spree::Product.all.each { |p| update_prices_for(p) }
       end
     end
 
-    private
-
-    def proccess_variants(product)
+    def update_prices_for(product)
       product.variants_including_master.each do |variant|
         from_price = variant.price_in(from_currency.upcase)
 
