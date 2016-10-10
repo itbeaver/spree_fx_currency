@@ -71,7 +71,7 @@ RSpec.describe Spree::FxRate, type: :model do
             expect { subject.update_products_prices }.to change {
               variant_prices.reload.find_by(currency: subject.to_currency)
                             .try(:display_amount).to_s
-            }.from('').to('€8.85')
+            }.from('€10.00').to('€8.85')
           end
         end
       end

@@ -54,20 +54,24 @@ module Spree
     #        fx rate changes to blank prices
     def update_products_prices
       Spree::Product.transaction do
-        Spree::Product.all.each { |p| update_prices_for(p) }
+        Spree::Product.all.each { |p| update_prices_for_product(p) }
       end
     end
 
-    def update_prices_for(product)
+    def update_prices_for_product(product)
       product.variants_including_master.each do |variant|
-        from_price = variant.price_in(from_currency.upcase)
-
-        next if from_price.new_record?
-
-        new_price = variant.price_in(to_currency.upcase)
-        new_price.amount = from_price.amount * rate
-        new_price.save if new_price.changed?
+        update_prices_for_variant(variant)
       end
+    end
+
+    def update_prices_for_variant(variant)
+      from_price = variant.price_in(from_currency.upcase)
+
+      return if from_price.new_record?
+
+      new_price = variant.price_in(to_currency.upcase)
+      new_price.amount = from_price.amount * rate
+      new_price.save if new_price.changed?
     end
   end
 end
