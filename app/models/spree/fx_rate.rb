@@ -32,7 +32,7 @@ module Spree
     def self.create_supported_currencies
       return unless table_exists?
       sync_currencies_from_config
-      fetch_fixer if Rails.env.production?
+      # fetch_fixer if Rails.env.production?
     end
 
     def self.fetch_fixer
