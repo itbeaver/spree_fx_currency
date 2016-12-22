@@ -3,7 +3,6 @@ SpreeFxCurrency
 [![Build Status](https://travis-ci.org/itbeaver/spree_fx_currency.svg?branch=3-0-stable)](https://travis-ci.org/itbeaver/spree_fx_currency)
 [![Code Climate](https://codeclimate.com/github/itbeaver/spree_fx_currency/badges/gpa.svg)](https://codeclimate.com/github/itbeaver/spree_fx_currency)
 
-
 Spree currency converter. Use foreign exchange rates (relative to main currency) mannualy entered in admin area.
 
 Extends [spree-contrib/spree_multi_currency](https://github.com/spree-contrib/spree_multi_currency/).
@@ -19,12 +18,12 @@ Extends [spree-contrib/spree_multi_currency](https://github.com/spree-contrib/sp
   For example, use `3-1-stable` if you're using Spree `3-1-stable` or any `3.1.x` version.
 
 2. Install the gem using Bundler:
-  ```ruby
+  ```shell
   bundle install
   ```
 
 3. Copy & run migrations
-  ```ruby
+  ```shell
   bundle exec rails g spree_fx_currency:install
   ```
 
@@ -48,6 +47,11 @@ Simply add this require statement to your spec_helper:
 require 'spree_fx_currency/factories'
 ```
 
+Don't forget to run `spree_multi_currency` generator in `spec/dummy` directory
+
+```shell
+bundle exec rails g spree_multi_currency:install
+```
 
 ## Contributing
 
