@@ -7,6 +7,27 @@ Spree currency converter. Use foreign exchange rates (relative to main currency)
 
 Extends [spree-contrib/spree_multi_currency](https://github.com/spree-contrib/spree_multi_currency/).
 
+Adds FX Rates tab:
+![FX Rates tab](/../screenshots/screenshots/1_admin_fx_rates.jpg?raw=true)
+
+FX Rates currencies based from general settings:
+![General settings](/../screenshots/screenshots/2_admin_general_settings.jpg?raw=true)
+
+Prices are calculated relative to product master price:
+![Product](/../screenshots/screenshots/3_admin_product.jpg?raw=true)
+
+Prices are recalculated each time when product/variant is changing
+When FX Rate changes - all products prices are recalculated
+
+Product prices:
+![Product prices](/../screenshots/screenshots/4_admin_product_prices.jpg?raw=true)
+
+Frontend product example:
+
+![Frontend example 1](/../screenshots/screenshots/5_product_example_usd.jpg?raw=true)
+![Frontend example 2](/../screenshots/screenshots/6_product_example_eur.jpg?raw=true)
+![Frontend example 3](/../screenshots/screenshots/7_product_example_gbp.jpg?raw=true)
+
 ## Installation
 
 1. Add this extension to your Gemfile with this line:
