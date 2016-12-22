@@ -18,8 +18,6 @@ Extends [spree-contrib/spree_multi_currency](https://github.com/spree-contrib/sp
   The `branch` option is important: it must match the version of Spree you're using.
   For example, use `3-1-stable` if you're using Spree `3-1-stable` or any `3.1.x` version.
 
-  For now - implemented **only** `3-0-stable` branch
-
 2. Install the gem using Bundler:
   ```ruby
   bundle install
