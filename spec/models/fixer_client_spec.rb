@@ -1,4 +1,38 @@
 RSpec.describe FixerClient, type: :model do
+  context '#initialize' do
+    context 'when base currency is nil' do
+      it 'raises ArgumentError' do
+        expect {
+          described_class.new(nil, ['EUR'])
+        }.to raise_error ArgumentError, 'Base currency is blank'
+      end
+    end
+
+    context 'when symbols currencies is string' do
+      it 'didnt raise error' do
+        expect {
+          described_class.new('USD', 'EUR')
+        }.not_to raise_error
+      end
+    end
+
+    context 'when symbols currencies is nil' do
+      it 'raises ArgumentError' do
+        expect {
+          described_class.new('USD', nil)
+        }.to raise_error ArgumentError, 'Symbols are blank'
+      end
+    end
+
+    context 'when symbols currencies is a number' do
+      it 'raises ArgumentError' do
+        expect {
+          described_class.new('USD', 1)
+        }.to raise_error ArgumentError, 'Symbols are blank'
+      end
+    end
+  end
+
   context '#fetch' do
     context 'when request not raise an error' do
       before(:each) do

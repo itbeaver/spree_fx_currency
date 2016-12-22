@@ -1,10 +1,14 @@
 class FixerClient
   attr_reader :uri
 
-  def initialize(base_raw, symbols_raw)
-    symbols = symbols_raw.map(&:upcase).join(',')
-    base = base_raw.upcase
-    @uri = URI("http://api.fixer.io/latest?base=#{base}&symbols=#{symbols}")
+  def initialize(base, symbols)
+    symbols_formatted = [*symbols].select { |s| s.is_a? String }.map(&:upcase).join(',')
+    raise ArgumentError, 'Symbols are blank' if symbols_formatted.blank?
+    raise ArgumentError, 'Base currency is blank' if base.blank?
+    base_formatted = base.upcase
+    @uri = URI(
+      "http://api.fixer.io/latest?base=#{base_formatted}&symbols=#{symbols_formatted}"
+    )
   end
 
   def fetch
