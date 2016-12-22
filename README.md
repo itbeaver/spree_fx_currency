@@ -28,6 +28,8 @@ Frontend product example:
 ![Frontend example 2](/../screenshots/screenshots/6_product_example_eur.jpg?raw=true)
 ![Frontend example 3](/../screenshots/screenshots/7_product_example_gbp.jpg?raw=true)
 
+FX Rates can be fetched from http://fixer.io/ (JSON API for foreign exchange rates and currency conversion) from the admin area
+
 ## Installation
 
 1. Add this extension to your Gemfile with this line:
