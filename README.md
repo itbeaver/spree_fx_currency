@@ -3,10 +3,32 @@ SpreeFxCurrency
 [![Build Status](https://travis-ci.org/itbeaver/spree_fx_currency.svg?branch=3-0-stable)](https://travis-ci.org/itbeaver/spree_fx_currency)
 [![Code Climate](https://codeclimate.com/github/itbeaver/spree_fx_currency/badges/gpa.svg)](https://codeclimate.com/github/itbeaver/spree_fx_currency)
 
-
 Spree currency converter. Use foreign exchange rates (relative to main currency) mannualy entered in admin area.
 
 Extends [spree-contrib/spree_multi_currency](https://github.com/spree-contrib/spree_multi_currency/).
+
+Adds FX Rates tab:
+![FX Rates tab](/../screenshots/screenshots/1_admin_fx_rates.jpg?raw=true)
+
+FX Rates currencies based from general settings:
+![General settings](/../screenshots/screenshots/2_admin_general_settings.jpg?raw=true)
+
+Prices are calculated relative to product master price:
+![Product](/../screenshots/screenshots/3_admin_product.jpg?raw=true)
+
+Prices are recalculated each time when product/variant is changing
+When FX Rate changes - all products prices are recalculated
+
+Product prices:
+![Product prices](/../screenshots/screenshots/4_admin_product_prices.jpg?raw=true)
+
+Frontend product example:
+
+![Frontend example 1](/../screenshots/screenshots/5_product_example_usd.jpg?raw=true)
+![Frontend example 2](/../screenshots/screenshots/6_product_example_eur.jpg?raw=true)
+![Frontend example 3](/../screenshots/screenshots/7_product_example_gbp.jpg?raw=true)
+
+FX Rates can be fetched from http://fixer.io/ (JSON API for foreign exchange rates and currency conversion) from the admin area
 
 ## Installation
 
@@ -18,15 +40,13 @@ Extends [spree-contrib/spree_multi_currency](https://github.com/spree-contrib/sp
   The `branch` option is important: it must match the version of Spree you're using.
   For example, use `3-1-stable` if you're using Spree `3-1-stable` or any `3.1.x` version.
 
-  For now - implemented **only** `3-0-stable` branch
-
 2. Install the gem using Bundler:
-  ```ruby
+  ```shell
   bundle install
   ```
 
 3. Copy & run migrations
-  ```ruby
+  ```shell
   bundle exec rails g spree_fx_currency:install
   ```
 
@@ -50,6 +70,11 @@ Simply add this require statement to your spec_helper:
 require 'spree_fx_currency/factories'
 ```
 
+Don't forget to run `spree_multi_currency` generator in `spec/dummy` directory
+
+```shell
+bundle exec rails g spree_multi_currency:install
+```
 
 ## Contributing
 
